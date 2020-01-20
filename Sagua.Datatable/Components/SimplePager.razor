@@ -1,0 +1,42 @@
+﻿@inherits Table.SimplePager<TModel>
+@typeparam TModel
+
+<div class="d-flex">
+    <div>
+
+    </div>
+    <div class="ml-auto">
+        <nav aria-label="...">
+            <ul class="pagination justify-content-end pagination-sm">
+                @{ 
+                    if(CurrentPage > 2)
+                    {
+                         <li class="page-item"><a class="page-link" @onClick=GoToPage(CurrentPage-2) href="#">@(CurrentPage-2)</a></li>
+                    }
+                    if(CurrentPage > 1)
+                    {
+                         <li class="page-item"><a class="page-link"  @onClick=GoToPage(CurrentPage-1) href="#">@(CurrentPage-1)</a></li>
+                    }
+                }
+
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">
+                        @CurrentPage
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+
+                @{ 
+                    if(CurrentPage + 1 <= TotalPages)
+                    {
+                        <li class="page-item"><a class="page-link"  @onClick=GoToPage(CurrentPage+1) href="#">@(CurrentPage+1)</a></li>
+                    }
+                    if(CurrentPage + 2 <= TotalPages)
+                    {
+                        <li class="page-item"><a class="page-link"  @onClick=GoToPage(CurrentPage+2) href="#">@(CurrentPage+2)</a></li>
+                    }
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
