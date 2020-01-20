@@ -1,0 +1,44 @@
+﻿@inherits Table.PagingTable<TModel>
+@typeparam TModel
+
+<table class="table">
+    <thead>
+        <tr>
+            @{
+                foreach (var column in Columns)
+                {
+                    <th>
+                        <span>@column.Title</span>
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in this.GetData())
+            {
+                <tr>
+                    @{
+                        foreach (var column in Columns)
+                        {
+                            <td>
+                                <span>@column.Render(item)</span>
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="paging">
+    <CascadingValue Value="(Abstractions.ITablePaging)this" Name="PagingTable">
+        <Sagua.Datatable.Components.SimplePager></Sagua.Datatable.Components.SimplePager>
+    </CascadingValue>
+</div>
+
+<CascadingValue Value="(Abstractions.ITable<TModel>)this" Name="Table">
+        @ChildContent
+</CascadingValue>

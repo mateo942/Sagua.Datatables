@@ -6,23 +6,23 @@ using System.Text;
 
 namespace Sagua.Datatable.Table
 {
-    public class SimplePager<TModel> : ComponentBase, IPager
+    public class SimplePager : ComponentBase, IPager
     {
         [CascadingParameter(Name = "PagingTable")]
-        public  ITablePaging TablePaging { get; set; }
+        public ITablePaging TablePaging { get; set; }
 
         public int PageLimit { get; set; }
         public int TotalItems { get; set; }
         public int CurrentPage { get; set; }
-        public int TotalPages { get; set; }
+        public int TotalPages
+            => (int)Math.Ceiling((decimal)TotalItems / (decimal)PageLimit);
 
 
-
-        protected override void OnParametersSet()
+        protected override void OnInitialized()
         {
             TablePaging.SetPager(this);
 
-            base.OnParametersSet();
+            base.OnInitialized();
         }
 
         public void FirstPage()
@@ -32,9 +32,9 @@ namespace Sagua.Datatable.Table
 
         public void GoToPage(int index)
         {
-            if (index < 1)
+            if (index < 0)
             {
-                index = 1;
+                index = 0;
             } else if (index > TotalPages)
             {
                 index = TotalPages;
@@ -48,6 +48,13 @@ namespace Sagua.Datatable.Table
         public void LastPage()
         {
             GoToPage(TotalPages);
+        }
+
+        public void UpdatePager(IPaging paging)
+        {
+            PageLimit = paging.Limit ?? 20;
+            CurrentPage = paging.Page ?? 0;
+            TotalItems = paging.TotalItems;
         }
     }
 }

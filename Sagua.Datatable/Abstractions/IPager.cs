@@ -6,6 +6,8 @@ namespace Sagua.Datatable.Abstractions
 {
     public interface IPager
     {
+        void UpdatePager(IPaging paging);
+
         void FirstPage();
         void LastPage();
         void GoToPage(int index);
@@ -14,6 +16,6 @@ namespace Sagua.Datatable.Abstractions
         int TotalItems { get; set; }
 
         int CurrentPage { get; set; }
-        int TotalPages { get; set; }
+        int TotalPages { get; }
     }
 }

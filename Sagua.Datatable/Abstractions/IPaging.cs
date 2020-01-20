@@ -4,17 +4,11 @@ using System.Text;
 
 namespace Sagua.Datatable.Abstractions
 {
-    public enum OrderDirection
-    {
-        Asc,
-        Desc
-    }
-
     public interface IPaging
     {
+        int TotalItems { get; set; }
+
         int? Limit { get; set; }
         int? Page { get; set; }
-        OrderDirection OrderDirection { get; set; }
-        string OrderBy { get; set; }
     }
 }
