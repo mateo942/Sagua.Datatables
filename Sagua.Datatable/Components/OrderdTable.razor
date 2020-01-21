@@ -1,0 +1,41 @@
+﻿@inherits Table.OrderedTable<TModel>
+@typeparam TModel
+
+<table class="table">
+    <thead>
+        <tr>
+            @{
+                foreach (var column in Columns)
+                {
+                    <th @onclick="() => SetOrder(column)">
+                        <span>@column.Title</span>
+                        <span>@RenderSort(column)</span>
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in this.GetData())
+            {
+                <tr>
+                    @{
+                        foreach (var column in Columns)
+                        {
+                            <td>
+                                <span>@column.Render(item)</span>
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<CascadingValue Value="(Abstractions.ITable<TModel>)this" Name="Table">
+    <CascadingValue Value="(Abstractions.ITableOrdered)this" Name="TableOrdered">
+        @ChildContent
+    </CascadingValue>
+</CascadingValue>

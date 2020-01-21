@@ -1,0 +1,48 @@
+﻿@page "/orderedtable"
+
+<Sagua.Datatable.Components.OrderdTable Items=Items>
+    <Sagua.Datatable.Components.OrderdColumn TModel="Models.User" Title="Login" Field="@(x => x.Login)" Source="login" IsSortable="true"/>
+    <Sagua.Datatable.Components.OrderdColumn TModel="Models.User" Title="Email" Field="@(x => x.Email)" Source="email" IsSortable="true"/>
+    <Sagua.Datatable.Components.OrderdColumn TModel="Models.User" Title="Last active" Field="@(x => x.LastActiveAt)" Format="d"/>
+</Sagua.Datatable.Components.OrderdTable>
+
+@code {
+    public IEnumerable<Models.User> Items = Enumerable.Empty<Models.User>();
+
+    protected override void OnInitialized()
+    {
+        var users = new List<Models.User>();
+
+        users.Add(new Models.User
+        {
+            Id = Guid.NewGuid(),
+            Login = "admin",
+            Email = "admin@sagua.com",
+            LastActiveAt = DateTime.Now,
+            Role = Models.Role.Admin
+        });
+
+        users.Add(new Models.User
+        {
+            Id = Guid.NewGuid(),
+            Login = "user",
+            Email = "user@sagua.com",
+            LastActiveAt = DateTime.Now.AddMinutes(-233),
+            Role = Models.Role.User
+        });
+
+        for (int i = 0; i < 3; i++)
+        {
+            users.Add(new Models.User
+            {
+                Id = Guid.NewGuid(),
+                Login = $"user {i}",
+                Email = "user@sagua.com",
+                LastActiveAt = DateTime.Now.AddMinutes(-123),
+                Role = Models.Role.User
+            });
+        }
+
+        Items = users;
+    }
+}
