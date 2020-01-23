@@ -8,6 +8,6 @@ namespace Sagua.Datatable.Abstractions
     public interface IDataSource<TModel>
     {
         int Total { get; set; }
-        Task<IEnumerable<TModel>> ExecuteAsync(IPaging paging);
+        Task<IEnumerable<TModel>> ExecuteAsync(IDataSourcePaging paging);
     }
 }

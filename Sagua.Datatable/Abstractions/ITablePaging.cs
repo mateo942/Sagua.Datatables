@@ -7,7 +7,7 @@ namespace Sagua.Datatable.Abstractions
     public interface ITablePaging
     {
         IPaging GetPaging();
-        void SetPaging(IPaging paging);
+        void SetPaging(IPaging paging, bool reload);
 
         void SetPager(IPager pager);
         void UpdatePager();

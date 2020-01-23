@@ -66,7 +66,7 @@ namespace Sagua.Datatable.Table
             return _paging;
         }
 
-        public void SetPaging(IPaging paging)
+        public void SetPaging(IPaging paging, bool reload)
         {
             _paging = paging;
 

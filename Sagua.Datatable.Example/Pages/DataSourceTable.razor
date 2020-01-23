@@ -1,0 +1,16 @@
+﻿@page "/datasourcetable"
+
+<Sagua.Datatable.Components.DataSourceTable DataSource=dataSource>
+    <Sagua.Datatable.Components.OrderdColumn TModel="Models.User" Title="Login" Field="@(x => x.Login)" Source="login" IsSortable="true"/>
+    <Sagua.Datatable.Components.OrderdColumn TModel="Models.User" Title="Email" Field="@(x => x.Email)" Source="email" IsSortable="true"/>
+    <Sagua.Datatable.Components.OrderdColumn TModel="Models.User" Title="Last active" Field="@(x => x.LastActiveAt)" Format="d"/>
+</Sagua.Datatable.Components.DataSourceTable>
+
+
+@code {
+
+    Sagua.Datatable.Abstractions.IDataSource<Models.User> dataSource = new DataSources.UserDataSource();
+
+}
+
+
