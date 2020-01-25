@@ -4,7 +4,19 @@
     <Columns>
         <Sagua.Table.Components.Column TModel="Models.Todo" Title="Id" Field="x => x.Id"/>
         <Sagua.Table.Components.Column TModel="Models.Todo" Title="Title" Source="Title" IsSortable="true"/>
-        <Sagua.Table.Components.Column TModel="Models.Todo" Title="Completed" Field="x => x.Completed" IsSortable="true"/>
+        <Sagua.Table.Components.Column TModel="Models.Todo" Title="Completed" Field="x => x.Completed" IsSortable="true">
+            <Template Context="item">
+                @{ 
+                    if (item.Completed)
+                    {
+                        <span class="badge badge-success">Yes</span>
+                    } else
+                    {
+                        <span class="badge badge-danger">No</span>
+                    }
+                }
+            </Template>
+        </Sagua.Table.Components.Column>
     </Columns>
 </Sagua.Table.Components.Table>
 

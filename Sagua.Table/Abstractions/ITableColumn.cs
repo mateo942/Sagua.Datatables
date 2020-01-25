@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Sagua.Table.Abstractions
         string Format { get; set; }
 
         void Update();
-        string Render(object source);
+        RenderFragment Render(object source);
     }
 
     public interface ITableColumn<TModel> : ITableColumn

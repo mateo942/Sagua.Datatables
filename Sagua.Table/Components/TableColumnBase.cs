@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Sagua.Table.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace Sagua.Table.Components
     {
         [CascadingParameter(Name = "Table")]
         public ITable Table { get; set; }
+
+        [Parameter]
+        public RenderFragment<TModel> Template { get; set; }
 
         [Parameter]
         public bool IsSortable { get; set; }
@@ -93,11 +97,20 @@ namespace Sagua.Table.Components
             this.StateHasChanged();
         }
 
-        public virtual string Render(object source)
+        public virtual RenderFragment Render(object source)
         {
-            string output = string.Empty;
+            if (Template != null)
+                return Template((TModel)source);
 
-            output = GetValueByPropertyName(source);
+            return new RenderFragment(x =>
+            {
+                x.AddContent(0, RenderString(source));
+            });
+        }
+
+        private string RenderString(object source)
+        {
+            string output = GetValueByPropertyName(source);
 
             if (string.IsNullOrEmpty(Format))
                 return output.ToString();
