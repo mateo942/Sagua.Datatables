@@ -2,15 +2,15 @@
 @typeparam TModel
 
 
-<table class="table">
-    <thead>
+<table class="@TableTemplate.TableClass">
+    <thead class="@TableTemplate.TableHeadClass">
         <tr>
             <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
                 @Columns
             </CascadingValue>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="@TableTemplate.TableBodyClass">
         <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
             <Sagua.Table.Components.TablePlaceholder></Sagua.Table.Components.TablePlaceholder>
         </CascadingValue>
@@ -20,7 +20,7 @@
             {
                 foreach (var item in CacheItems)
                 {
-                    <tr>
+                    <tr class="@TableTemplate.TableRowClass @TableTemplate.DynamicTableRowClass(item)">
                         @{
                             foreach (var column in TableColumns)
                             {

@@ -13,6 +13,8 @@ namespace Sagua.Table.Components
     {
         [Inject]
         protected ILogger<TableBase<TModel>> Logger { get; set; }
+        [Inject]
+        protected IThemeProvider ThemeProvider { get; set; }
 
         [Parameter]
         public RenderFragment Columns { get; set; }
@@ -24,6 +26,8 @@ namespace Sagua.Table.Components
         public bool UsePager { get; set; }
         [Parameter]
         public int Limit { get; set; }
+        [Parameter]
+        public string Name { get; set; }
 
         public IPager Pager { get; set; }
         public IPaging Paging { get; protected set; }
@@ -32,6 +36,7 @@ namespace Sagua.Table.Components
 
         protected ISet<ITableColumn> TableColumns { get; set; }
         protected IEnumerable<TModel> CacheItems { get; set; }
+        protected ITableTemplate TableTemplate { get; set; }
 
         private IEnumerable<ITableOrderColumn> GetOrderColumns
             => TableColumns.Where(x => typeof(ITableOrderColumn).IsAssignableFrom(x.GetType())).Cast<ITableOrderColumn>();
@@ -46,6 +51,7 @@ namespace Sagua.Table.Components
         protected override void OnParametersSet()
         {
             Paging.Limit = Limit;
+            TableTemplate = ThemeProvider.GetTemplate(Name);
 
             LoadData();
         }

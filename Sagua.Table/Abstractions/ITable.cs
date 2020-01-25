@@ -6,6 +6,8 @@ namespace Sagua.Table.Abstractions
 {
     public interface ITable
     {
+        string Name { get; set; }
+
         void AddColumn(ITableColumn column);
         void RemoveColumn(ITableColumn column);
 
