@@ -14,6 +14,8 @@ namespace Sagua.Table.Components
     {
         [CascadingParameter(Name = "Table")]
         public ITable Table { get; set; }
+        [Inject]
+        protected IThemeProvider ThemeProvider { get; set; }
 
         [Parameter]
         public RenderFragment<TModel> Template { get; set; }
@@ -31,6 +33,7 @@ namespace Sagua.Table.Components
 
         protected bool IsCurrentSort { get; set; }
         protected OrderDirection OrderDirection { get; set; }
+        protected ITableTemplate TableTemplate { get; set; }
 
         protected override void OnInitialized()
         {
@@ -39,6 +42,8 @@ namespace Sagua.Table.Components
 
         protected override void OnParametersSet()
         {
+            TableTemplate = ThemeProvider.GetTemplate(string.Empty);
+
             if (string.IsNullOrEmpty(Source) && Field != null)
             {
                 Source = GetMemberName(Field.Body);
