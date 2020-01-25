@@ -1,0 +1,84 @@
+﻿@inherits ComponentBase
+@implements Abstractions.ITablePlaceholder
+
+<style>
+    @@keyframes placeHolderShimmer {
+        0% {
+            background-position: -468px 0
+        }
+
+        100% {
+            background-position: 468px 0
+        }
+    }
+
+    .col-placeholder {
+        padding: .2em;
+    }
+
+        .col-placeholder .bg {
+            height: 14px;
+            background-color: rgba(128, 128, 128, .3);
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-name: placeHolderShimmer;
+            animation-timing-function: linear;
+            background: #f6f7f8;
+            background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+            background-size: 1000px 104px;
+            position: relative;
+            overflow: hidden;
+        }
+</style>
+
+@{
+    if (_show)
+    {
+        for (int i = 0; i < _rows; i++)
+        {
+            <tr>
+                @{
+                    for (int j = 0; j < _columns; j++)
+                    {
+                        <td class="col-placeholder">
+                            <div class="bg"></div>
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    }
+}
+
+@code{
+    [CascadingParameter(Name = "Table")]
+    public Abstractions.ITable Table { get; set; }
+
+    private bool _show = true;
+    private int _columns = 4;
+    private int _rows = 5;
+
+    protected override void OnInitialized()
+    {
+        Table.SetPlaceholder(this);
+    }
+
+    public void Configure(int columns, int rows)
+    {
+        _columns = columns;
+        _rows = rows;
+    }
+
+    public void ShowPlaceholder()
+    {
+        _show = true;
+        this.StateHasChanged();
+    }
+
+    public void HidePlaceholder()
+    {
+        _show = false;
+        this.StateHasChanged();
+    }
+}

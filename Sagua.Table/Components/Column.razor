@@ -1,0 +1,39 @@
+﻿@inherits TableColumnBase<TModel>
+@typeparam TModel
+
+<th>
+    @{
+        if (IsSortable)
+        {
+            <div class="d-flex" @onclick="() => SetSelfOrder()">
+                <span>@Title</span>
+
+                <div class="ml-auto">
+                    @{
+                        if (IsCurrentSort)
+                        {
+                            if (OrderDirection == Abstractions.OrderDirection.Asc)
+                            {
+                                <span>A</span>
+                            }
+                            else
+                            {
+                                <span>D</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>N</span>
+                        }
+                    }
+                </div>
+            </div>
+
+
+        }
+        else
+        {
+            <span>@Title</span>
+        }
+    }
+</th>

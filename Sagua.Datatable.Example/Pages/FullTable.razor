@@ -1,0 +1,13 @@
+﻿@page "/fullTable"
+
+<Sagua.Table.Components.Table TModel="Models.Todo" DataSource="TodoExampleDataSource" UsePager="true" Limit="10">
+    <Columns>
+        <Sagua.Table.Components.Column TModel="Models.Todo" Title="Id" Field="x => x.Id"/>
+        <Sagua.Table.Components.Column TModel="Models.Todo" Title="Title" Source="Title" IsSortable="true"/>
+        <Sagua.Table.Components.Column TModel="Models.Todo" Title="Completed" Field="x => x.Completed" IsSortable="true"/>
+    </Columns>
+</Sagua.Table.Components.Table>
+
+@code {
+    private DataSources.TodoExampleDataSource TodoExampleDataSource = new DataSources.TodoExampleDataSource();
+}

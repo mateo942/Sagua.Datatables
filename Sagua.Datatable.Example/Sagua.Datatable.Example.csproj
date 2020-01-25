@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sagua.Datatable\Sagua.Datatable.csproj" />
+    <ProjectReference Include="..\Sagua.Table\Sagua.Table.csproj" />
   </ItemGroup>
 
 </Project>

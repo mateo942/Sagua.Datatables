@@ -1,0 +1,41 @@
+﻿@inherits TableBase<TModel>
+@typeparam TModel
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
+                @Columns
+            </CascadingValue>
+        </tr>
+    </thead>
+    <tbody>
+        <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
+            <Sagua.Table.Components.TablePlaceholder></Sagua.Table.Components.TablePlaceholder>
+        </CascadingValue>
+
+        @{
+            if (CacheItems != null)
+            {
+                foreach (var item in CacheItems)
+                {
+                    <tr>
+                        @{
+                            foreach (var column in TableColumns)
+                            {
+                                <td>
+                                    @column.Render(item)
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            } 
+        }
+    </tbody>
+</table>
+
+<CascadingValue Value="(Abstractions.ITable)this" Name="Table">
+    <Sagua.Table.Components.Pager></Sagua.Table.Components.Pager>
+</CascadingValue>
