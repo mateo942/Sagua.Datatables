@@ -100,7 +100,7 @@ namespace Sagua.Table.Components
                 Logger.LogDebug("Not found actions to load data");
             }
 
-            Logger.LogDebug("Data has been loaded. Total items: {0}", CacheItems.Count());
+            Logger.LogDebug("Data has been loaded. Total items: {0}", CacheItems?.Count());
 
             Update();
             TablePlaceholder?.HidePlaceholder();
