@@ -55,7 +55,12 @@ namespace Sagua.Table.Components
             Paging.Limit = Limit;
             TableTemplate = ThemeProvider.GetTemplate(Name);
 
-            LoadData();
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if(firstRender)
+                LoadData();
         }
 
         public async void LoadData()
