@@ -58,7 +58,11 @@ namespace Sagua.Table.Components
 
         public async void LoadData()
         {
-            TablePlaceholder?.ShowPlaceholder();
+            if(TablePlaceholder != null)
+            {
+                TablePlaceholder.ConfigureRows(CacheItems?.Count() ?? 10);
+                TablePlaceholder.ShowPlaceholder();
+            }
             Logger.LogDebug("Clearing old data...");
             CacheItems = Enumerable.Empty<TModel>();
             this.StateHasChanged(); //Update only table
