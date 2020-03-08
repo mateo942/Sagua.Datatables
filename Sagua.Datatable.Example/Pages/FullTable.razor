@@ -17,6 +17,13 @@
                 }
             </Template>
         </Sagua.Table.Components.Column>
+        <Sagua.Table.Components.Column TModel="Models.Todo" Field="x => x.Id" IsSortable="false" IsButtons="true">
+            <Template Context="item">
+                <div class="btn-group">
+                    <button class="btn btn-danger">Delete</button>
+                </div>
+            </Template>
+        </Sagua.Table.Components.Column>
     </Columns>
 </Sagua.Table.Components.Table>
 

@@ -9,13 +9,15 @@ namespace Sagua.Table.Helpers
     public class BootstrapTemplate : ITableTemplate
     {
         public string TableClass
-            => "table table-hover table-sm";
+            => "table table-hover";
         public string TableHeadClass
-            => "thead-dark";
+            => string.Empty;
         public string TableBodyClass
             => string.Empty;
         public string TableRowClass
             => string.Empty;
+        public string TableButtonRowClass
+            => "buttons";
 
         public string SortIconNone
             => "fas fa-sort";

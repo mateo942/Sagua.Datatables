@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Sagua.Table.Components
@@ -30,6 +31,8 @@ namespace Sagua.Table.Components
         public string Format { get; set; }
         [Parameter]
         public Expression<Func<TModel, object>> Field { get; set; }
+        [Parameter]
+        public bool IsButtons { get; set; }
 
         protected bool IsCurrentSort { get; set; }
         protected OrderDirection OrderDirection { get; set; }
@@ -130,7 +133,11 @@ namespace Sagua.Table.Components
             if (property == null)
                 return string.Empty;
 
-            return property.GetValue(source).ToString();
+            var value = property.GetValue(source);
+            if (value == null)
+                return string.Empty;
+
+            return value.ToString();
         }
 
         public void Update(IPaging paging)
