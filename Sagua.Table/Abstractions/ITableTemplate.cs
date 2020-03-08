@@ -13,6 +13,7 @@ namespace Sagua.Table.Abstractions
         string TableRowClass { get; }
         Func<object, string> DynamicTableRowClass { get; }
         string TableButtonRowClass { get; }
+        string TableResponsiveClass { get; }
 
         string SortIconNone { get; }
         string SortIconAsc { get; }

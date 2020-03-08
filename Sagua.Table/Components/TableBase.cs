@@ -28,6 +28,8 @@ namespace Sagua.Table.Components
         public int Limit { get; set; }
         [Parameter]
         public string Name { get; set; }
+        [Parameter]
+        public bool IsResponsive { get; set; } = true;
 
         public IPager Pager { get; set; }
         public IPaging Paging { get; protected set; }

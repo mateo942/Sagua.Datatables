@@ -1,41 +1,43 @@
 ﻿@inherits TableBase<TModel>
 @typeparam TModel
 
-
-<table class="@TableTemplate.TableClass">
-    <thead class="@TableTemplate.TableHeadClass">
-        <tr>
+<div class="@(IsResponsive?TableTemplate.TableResponsiveClass:string.Empty)">
+    <table class="@TableTemplate.TableClass">
+        <thead class="@TableTemplate.TableHeadClass">
+            <tr>
+                <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
+                    @Columns
+                </CascadingValue>
+            </tr>
+        </thead>
+        <tbody class="@TableTemplate.TableBodyClass">
             <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
-                @Columns
+                <Sagua.Table.Components.TablePlaceholder></Sagua.Table.Components.TablePlaceholder>
             </CascadingValue>
-        </tr>
-    </thead>
-    <tbody class="@TableTemplate.TableBodyClass">
-        <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
-            <Sagua.Table.Components.TablePlaceholder></Sagua.Table.Components.TablePlaceholder>
-        </CascadingValue>
 
-        @{
-            if (CacheItems != null)
-            {
-                foreach (var item in CacheItems)
+            @{
+                if (CacheItems != null)
                 {
-                    <tr class="@TableTemplate.TableRowClass @TableTemplate.DynamicTableRowClass(item)">
-                        @{
-                            foreach (var column in TableColumns)
-                            {
-                                <td>
-                                    @column.Render(item)
-                                </td>
+                    foreach (var item in CacheItems)
+                    {
+                        <tr class="@TableTemplate.TableRowClass @TableTemplate.DynamicTableRowClass(item)">
+                            @{
+                                foreach (var column in TableColumns)
+                                {
+                                    <td>
+                                        @column.Render(item)
+                                    </td>
+                                }
                             }
-                        }
-                    </tr>
+                        </tr>
+                    }
                 }
-            } 
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
 
-<CascadingValue Value="(Abstractions.ITable)this" Name="Table">
-    <Sagua.Table.Components.Pager></Sagua.Table.Components.Pager>
-</CascadingValue>
+    <CascadingValue Value="(Abstractions.ITable)this" Name="Table">
+        <Sagua.Table.Components.Pager></Sagua.Table.Components.Pager>
+    </CascadingValue>
+</div>
+

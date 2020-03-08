@@ -18,6 +18,8 @@ namespace Sagua.Table.Helpers
             => string.Empty;
         public string TableButtonRowClass
             => "buttons";
+        public string TableResponsiveClass
+            => "table-responsive";
 
         public string SortIconNone
             => "fas fa-sort";
@@ -28,5 +30,6 @@ namespace Sagua.Table.Helpers
 
         public Func<object, string> DynamicTableRowClass
             => x => string.Empty;
+
     }
 }
